@@ -8,32 +8,17 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      route:parseRoute(window.location.hash)
+
     }
-  }
-  componentDidMount(){
-    window.addEventListener('hashchange',(event)=>{
-      this.setState({
-        route:parseRoute(window.location.hash)
-      })
-    })
-  }
-  renderPage(){
 
   }
-
-
-
-
-
 
   render() {
-    return (
-      <>
-      <NavBar/>;
-      <Home />;
-      </>
-
-    )
+      return
+      (
+        <>
+          <NavBar/>;
+        </>
+      )
   }
 }

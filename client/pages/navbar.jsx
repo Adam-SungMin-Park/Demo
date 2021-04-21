@@ -5,8 +5,6 @@ export default class NavBar extends React.Component{
   constructor(props){
     super(props)
     this.state= {
-      userId: this.props.userId,
-      view:"no"
     }
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleReload = this.handleReload.bind(this);
@@ -24,16 +22,6 @@ export default class NavBar extends React.Component{
       })
     }
   }
-
-  handleSignOut(){
-    window.localStorage.removeItem("token")
-    this.setState({
-      userId: 0,
-      view:"no"
-    })
-    window.location.reload();
-  }
-
   handleClick() {
     document.querySelector('.navbar-collapse').className = 'navbar-collapse collapse'
   }

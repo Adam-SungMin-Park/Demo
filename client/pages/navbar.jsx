@@ -6,7 +6,6 @@ export default class NavBar extends React.Component{
     super(props)
     this.state= {
     }
-    this.handleSignOut = this.handleSignOut.bind(this);
     this.handleReload = this.handleReload.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }

@@ -15,7 +15,18 @@ const db = new pg.Pool({
 
 app.use(jsonMiddleware);
 
-app.post('/demo/item',(req,res)=>{
+app.post('/api/Demo',(req,res)=>{
+  const sql = `
+    insert into "items"("itemName" , "itemPrice" , "itemImage" , "itemQty")
+    values ($1, $2, $3, $4)
+    returning "itemId"
+  `
+  const params = [req.body.itemName , req.body.itemPrice ,req.body.itemImage, req.body.itemQty]
+
+  db.query(sql,params)
+  .then(res => {return (res)})
+  .catch(err => {return err})
+  res.status(201).json()
 
 })
 

@@ -13,6 +13,7 @@ export default class AddItem extends React.Component{
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleChangePrice = this.handleChangePrice.bind(this);
     this.handleChangeQty = this.handleChangeQty.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChangeName(){
     this.setState({
@@ -34,12 +35,16 @@ export default class AddItem extends React.Component{
       itemQty:event.target.value
     })
   }
+
+  handleSubmit(){
+    console.log('hi')
+  }
   render(){
     console.log(this.state)
     return(
       <>
       <h1>Add Item Page</h1>
-      <form>
+      <form onSubmit = {this.handleSubmit}>
         <div className="mb-3">
           <label  className="form-label">Item Name</label>
           <input onChange ={(e)=>{this.handleChangeName(e)}} value = {this.state.itemName} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>

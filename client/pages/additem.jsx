@@ -37,7 +37,19 @@ export default class AddItem extends React.Component{
   }
 
   handleSubmit(){
-    console.log('hi')
+    console.log("submit")
+    fetch('/api/Demo', {
+      method:'POST',
+      headers:{
+        'Content-Type' : 'application/json'
+      },
+      body:JSON.stringify(this.state)
+    })
+    .then(res => (res.json()))
+    .then(data => (data))
+    .catch(err =>{return err})
+
+
   }
   render(){
     console.log(this.state)
@@ -47,7 +59,7 @@ export default class AddItem extends React.Component{
       <form onSubmit = {this.handleSubmit}>
         <div className="mb-3">
           <label  className="form-label">Item Name</label>
-          <input onChange ={(e)=>{this.handleChangeName(e)}} value = {this.state.itemName} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+          <input onChange ={(e)=>{this.handleChangeName(e)}} value = {this.state.itemName} type="string" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
         </div>
         <div className="mb-3">
           <label  className="form-label">Item Image</label>

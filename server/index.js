@@ -24,8 +24,8 @@ app.post('/api/Demo',(req,res)=>{
   const params = [req.body.itemName , req.body.itemPrice ,req.body.itemImage, req.body.itemQty]
 
   db.query(sql,params)
-  .then(res => res.status(201).json())
-  .catch(err => console.log(err))
+  .then(res => res.status(201).json(result.rows))
+  .catch(err => console.log("THIS IS KILLING" + err))
 
 
 })

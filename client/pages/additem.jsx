@@ -73,7 +73,7 @@ export default class AddItem extends React.Component{
           <label className="form-label">Item Qty</label>
           <input onChange ={(e)=>{this.handleChangeQty(e)}} value = {this.state.itemQty} type="Number" min = "0" className="form-control" id="exampleInputPassword1"/>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button href = "#" type="submit" className="btn btn-primary">Submit</button>
       </form>
       </>
     )

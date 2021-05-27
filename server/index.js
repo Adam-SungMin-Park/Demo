@@ -15,10 +15,24 @@ const db = new pg.Pool({
 
 app.use(jsonMiddleware);
 
+
+app.get('/api/Demo',(req,res)=>{
+  const sql = `
+    select "itemId" , "itemName" , "itemPrice" , "itemQty"
+    from "items"
+    order by "itemId"
+  `
+  db.query(sql)
+  .then(result =>{
+    res.json(result.rows)
+  })
+  .catch(err => {return err})
+})
+
 app.post('/api/Demo',(req,res)=>{
   const sql = `
-    insert into "items"("itemName" , "itemPrice" , "itemImage" , "itemQty")
-    values ($1, $2, $3, $4)
+    insert into "items"("itemName" , "itemPrice"  , "itemQty")
+    values ($1, $2, $3)
     returning "itemId"
   `
   const params = [req.body.itemName , req.body.itemPrice ,req.body.itemImage, req.body.itemQty]

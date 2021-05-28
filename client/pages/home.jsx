@@ -40,7 +40,22 @@ export default class Home extends React.Component {
     if(this.state.itemId.length !==0){
       return(
         <div className = "container">
-
+            {this.state.itemId.map((itemId, index)=>{
+              return(
+              <div className = "row itemsRow">
+                <div key = {index} className ="item">
+                   {itemId}
+                </div>
+              </div>
+              )
+            })}
+             {this.state.name.map((name, index)=>{
+              return(
+                <div key = {index} className ="item">
+                   {name}
+                </div>
+              )
+            })}
         </div>
       )
     }

@@ -62,10 +62,6 @@ export default class AddItem extends React.Component{
           <input onChange ={(e)=>{this.handleChangeName(e)}} value = {this.state.itemName} type="string" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
         </div>
         <div className="mb-3">
-          <label  className="form-label">Item Image</label>
-          <input onChange ={(e)=>{this.handleChangeImage(e)}} value = {this.state.itemImage} type="file" className="form-control" id="exampleInputPassword1"/>
-        </div>
-        <div className="mb-3">
           <label  className="form-label">Item Price</label>
           <input onChange ={(e)=>{this.handleChangePrice(e)}} value = {this.state.itemPrice} type="number" min = "0" className="form-control" id="exampleInputPassword1"/>
         </div>

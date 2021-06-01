@@ -3,7 +3,7 @@ import Home from './pages/home';
 import NavBar from './pages/navbar';
 import parseRoute from './pages/parseroute';
 import AddItem from './pages/additem';
-
+import Update from './pages/update'
 
 
 
@@ -41,7 +41,9 @@ export default class App extends React.Component {
     if(route.path === "home" || route.path ==="") {
       return <Home/>
     }
-
+    if(route.path === "update"){
+      return<Update/>
+    }
   }
 
   render(){

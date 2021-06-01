@@ -76,6 +76,16 @@ export default class Home extends React.Component {
             )
             })}
           </div>
+          <div className ="updateRemoveButton">
+            {this.state.itemId.map((itemId, index)=>{
+            return(
+              <div key = {index} className ="updateRemoveButton">
+                 <a href="#update"><button>update</button></a>
+                 <button>remove</button>
+              </div>
+            )
+            })}
+          </div>
         </div>
       )
     }

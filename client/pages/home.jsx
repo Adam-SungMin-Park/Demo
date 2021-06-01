@@ -40,22 +40,42 @@ export default class Home extends React.Component {
     if(this.state.itemId.length !==0){
       return(
         <div className = "container">
+          <div className ="rowItemId">
             {this.state.itemId.map((itemId, index)=>{
               return(
-              <div className = "row itemsRow">
-                <div key = {index} className ="item">
+                <div key = {itemId} className ="item">
                    {itemId}
                 </div>
+              )
+            })}
+          </div>
+          <div className ="itemName">
+            {this.state.name.map((name, index)=>{
+            return(
+              <div key = {index} className ="item">
+                  {name}
               </div>
-              )
+            )
             })}
-             {this.state.name.map((name, index)=>{
-              return(
-                <div key = {index} className ="item">
-                   {name}
-                </div>
-              )
+          </div>
+          <div className ="itemPrice">
+            {this.state.price.map((price, index)=>{
+            return(
+              <div key = {index} className ="item">
+                  $ {price}
+              </div>
+            )
             })}
+          </div>
+          <div className ="itemQty">
+            {this.state.qty.map((qty, index)=>{
+            return(
+              <div key = {index} className ="item">
+                 in stock {qty}
+              </div>
+            )
+            })}
+          </div>
         </div>
       )
     }

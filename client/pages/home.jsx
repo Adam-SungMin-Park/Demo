@@ -4,41 +4,52 @@ import Update from './update'
 export default class Home extends React.Component {
   constructor(props){
     super(props);
-    this.state =
-      {
-        itemId:[],
-        name:[],
-        price:[],
-        qty:[]
-      }
+    this.state = {
+      items: [{
+        itemId:"",
+        name:"",
+        price:"",
+        qty:""
+      }]
+    }
       this.handleChangeQty = this.handleChangeQty.bind(this);
       this.handleChangePrice = this.handleChangePrice.bind(this);
       this.handleUpdate = this.handleUpdate.bind(this);
       this.handleRemove = this.handleRemove.bind(this);
   }
 
-  handleUpdate()
+  handleUpdate(){
+    fetch('/api/Demo', {
+      method:'PUT',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(this.state)
+    })
+  }
+  handleRemove(){
+    fetch('/api/Demo')
+  }
 
   handleChangeQty(e,index){
-    let prevQty = [...this.state.qty]
-    let newQty = {...this.state.qty[index]}
-    newQty = Number(e.target.value);
-    prevQty[index] =  newQty;
+    let currentQty = [...this.state.items]
+    let newQty = Number(e.target.value);
+    currentQty[index].itemQty = newQty
     this.setState({
-      qty:prevQty
+      items:currentQty
     })
+    console.log(this.state)
   }
 
 
   handleChangePrice(e,index){
-    let prevQty = [...this.state.price]
-    let newQty = {...this.state.price[index]}
-    newQty = Number(e.target.value);
-    prevQty[index] =  newQty;
+    let currentPrice = [...this.state.items]
+    let newQty = Number(e.target.value);
+    currentPrice[index].itemPrice =  newQty;
     this.setState({
-      price:prevQty
+      items:currentPrice
     })
-
+    console.log(this.state)
   }
 
   componentDidMount(){
@@ -46,82 +57,50 @@ export default class Home extends React.Component {
     .then(res => res.json())
     .then(res =>{
       console.log(res)
-      let nameArray =[];
-      let priceArray =[];
-      let qtyArray =[];
-      let itemIdArray =[];
+      let itemList = [];
       for(var i = 0 ; i < res.length ; i++){
-        nameArray.push(res[i].itemName);
-        priceArray.push(res[i].itemPrice);
-        qtyArray.push(res[i].itemQty);
-        itemIdArray.push(res[i].itemId);
+        itemList.push(res[i]);
       }
       this.setState({
-        itemId:itemIdArray,
-        name:nameArray,
-        price:priceArray,
-        qty:qtyArray
+        items: itemList
       })
     })
   }
   render(){
-    console.log({...this.state.qty})
-    if(this.state.itemId.length !==0){
+    const {itemId , price, name , qty} = this.state.items
+    const {items} = this.state.items
+
+    if(this.state.items.length !==0){
       return(
         <div className = "container">
-          <div className ="rowItemId">
-            {this.state.itemId.map((itemId, index)=>{
-              return(
-                <div key = {itemId} className ="item">
-                   {itemId}
-                </div>
-              )
-            })}
-          </div>
-          <div className ="itemName">
-            {this.state.name.map((name, index)=>{
+          <div className = "row">
+          {this.state.items.map((items, index )=>{
             return(
-              <div key = {index} className ="item">
-                  {name}
+              <div className ="itemsRow" key = {items.itemId}>
+                {items.itemId}
+              <div className = "itemName">
+                {items.itemName}
               </div>
-            )
-            })}
-          </div>
-          <div className ="itemPrice">
-            {this.state.price.map((price, index)=>{
-            return(
-              <div key = {index} className ="item">
-                $
-                <input type ="number" defaultValue = {price} onChange = {e => this.handleChangePrice(e,index)}></input>
+               <div className = "itemPrice">
+                  $
+                 <input onChange = {e=>{this.handleChangePrice(e,index)}}type = "number" defaultValue = {items.itemPrice}/>
               </div>
-            )
-            })}
-          </div>
-          <div className ="itemQty">
-            {this.state.qty.map((qty, index)=>{
-            return(
-              <div key = {index} className ="item">
-                 in stock
-                 <input type = "number" defaultValue ={qty} onChange = {e =>this.handleChangeQty(e,index)}></input>
+               <div className = "itemQty">
+                In Stock
+                <input onChange = {e => {this.handleChangeQty(e,index)}}type = "number" className = "qtyInput" defaultValue = {items.itemQty}/>
               </div>
-            )
-            })}
-          </div>
-          <div className ="updateRemoveButton">
-            {this.state.itemId.map((itemId, index)=>{
-            return(
-              <div key = {index} className ="updateRemoveButton">
-                 <a href="#update">
-                   <button onClick = {index => this.handleUpdate(index)}>update</button></a>
-                 <button onClick = {this.handleRemove}>remove</button>
+              <div className ="buttons">
+                <button>Update</button>
+                <button>Remove</button>
               </div>
+            </div>
             )
-            })}
+          })}
           </div>
         </div>
       )
     }
-    if(this.state.length === undefined){
+    if(this.state.items.length === undefined){
       return(
         <div className = "row">
           <div className = "col-12">

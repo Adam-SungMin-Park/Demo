@@ -8,3 +8,24 @@
 .rowItemId {
   display: grid;
 }
+.itemsRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.itemQty {
+  width: 20%;
+}
+.itemName {
+  width: 20%;
+}
+.itemPrice {
+  width: 20%;
+  height: 70%;
+  display: flex;
+}
+.qtyInput {
+  margin-left: 1rem;
+  width: 35%;
+}

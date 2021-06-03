@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-
+import Update from './update'
 export default class Home extends React.Component {
   constructor(props){
     super(props);
@@ -11,7 +11,36 @@ export default class Home extends React.Component {
         price:[],
         qty:[]
       }
+      this.handleChangeQty = this.handleChangeQty.bind(this);
+      this.handleChangePrice = this.handleChangePrice.bind(this);
+      this.handleUpdate = this.handleUpdate.bind(this);
+      this.handleRemove = this.handleRemove.bind(this);
   }
+
+  handleUpdate()
+
+  handleChangeQty(e,index){
+    let prevQty = [...this.state.qty]
+    let newQty = {...this.state.qty[index]}
+    newQty = Number(e.target.value);
+    prevQty[index] =  newQty;
+    this.setState({
+      qty:prevQty
+    })
+  }
+
+
+  handleChangePrice(e,index){
+    let prevQty = [...this.state.price]
+    let newQty = {...this.state.price[index]}
+    newQty = Number(e.target.value);
+    prevQty[index] =  newQty;
+    this.setState({
+      price:prevQty
+    })
+
+  }
+
   componentDidMount(){
     fetch('/api/Demo')
     .then(res => res.json())
@@ -36,7 +65,7 @@ export default class Home extends React.Component {
     })
   }
   render(){
-    console.log(this.state)
+    console.log({...this.state.qty})
     if(this.state.itemId.length !==0){
       return(
         <div className = "container">
@@ -62,7 +91,8 @@ export default class Home extends React.Component {
             {this.state.price.map((price, index)=>{
             return(
               <div key = {index} className ="item">
-                  $ {price}
+                $
+                <input type ="number" defaultValue = {price} onChange = {e => this.handleChangePrice(e,index)}></input>
               </div>
             )
             })}
@@ -71,7 +101,8 @@ export default class Home extends React.Component {
             {this.state.qty.map((qty, index)=>{
             return(
               <div key = {index} className ="item">
-                 in stock {qty}
+                 in stock
+                 <input type = "number" defaultValue ={qty} onChange = {e =>this.handleChangeQty(e,index)}></input>
               </div>
             )
             })}
@@ -80,8 +111,9 @@ export default class Home extends React.Component {
             {this.state.itemId.map((itemId, index)=>{
             return(
               <div key = {index} className ="updateRemoveButton">
-                 <a href="#update"><button>update</button></a>
-                 <button>remove</button>
+                 <a href="#update">
+                   <button onClick = {index => this.handleUpdate(index)}>update</button></a>
+                 <button onClick = {this.handleRemove}>remove</button>
               </div>
             )
             })}

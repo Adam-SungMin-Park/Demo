@@ -39,10 +39,10 @@ export default class NavBar extends React.Component{
                 <a className="nav-link" href="#additem" onClick = {this.handleClick}>Add Item</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#food" onClick={this.handleClick}>Food</a>
+                <a className="nav-link" href="#update" onClick={this.handleClick}>Update</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#journal" onClick={this.handleClick}>Body Weight</a>
+                <a className="nav-link" href="#cart" onClick={this.handleClick}>Cart</a>
               </li>
             </ul>
           </div>

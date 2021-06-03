@@ -1,5 +1,4 @@
 import React from 'react';
-import Home from './pages/home';
 import NavBar from './pages/navbar';
 import parseRoute from './pages/parseroute';
 import AddItem from './pages/additem';
@@ -38,10 +37,10 @@ export default class App extends React.Component {
     if (route.path === "additem") {
       return <AddItem/>
     }
-    if(route.path === "home" || route.path ==="") {
+    if(route.path === "home" ) {
       return <Home/>
     }
-    if(route.path === "update"){
+    if(route.path === "update" || route.path ===""){
       return<Update/>
     }
   }

@@ -32,8 +32,18 @@ export default class Home extends React.Component {
     .catch(err => console.log(err))
     window.location.reload()
   }
-  handleRemove(){
-    fetch('/api/Demo')
+  handleRemove(e,index){
+    fetch('/api/Demo/remove',{
+      method:'DELETE',
+      headers:{
+        'Content-type':'application/json'
+      },
+      body:JSON.stringify(this.state.items[index])
+    })
+    .then(res => (res))
+    .then(data =>(data))
+    .catch(err => console.log(err))
+    window.location.reload()
   }
 
   handleChangeName (e,index){

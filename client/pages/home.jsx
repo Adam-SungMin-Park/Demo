@@ -7,30 +7,44 @@ export default class Home extends React.Component {
     this.state = {
       items: [{
         itemId:"",
-        name:"",
-        price:"",
-        qty:""
+        itemName:"",
+        itemPrice:"",
+        itemQty:""
       }]
     }
       this.handleChangeQty = this.handleChangeQty.bind(this);
       this.handleChangePrice = this.handleChangePrice.bind(this);
       this.handleUpdate = this.handleUpdate.bind(this);
       this.handleRemove = this.handleRemove.bind(this);
+      this.handleChangeName = this.handleChangeName.bind(this);
   }
 
-  handleUpdate(){
-    fetch('/api/Demo', {
+  handleUpdate(e,index){
+    fetch('/api/Demo/update', {
       method:'PUT',
       headers:{
         'Content-Type':'application/json'
       },
-      body:JSON.stringify(this.state)
+      body:JSON.stringify(this.state.items[index])
     })
+    .then(res=>(res))
+    .then(data =>(data))
+    .catch(err => console.log(err))
+    window.location.reload()
   }
   handleRemove(){
     fetch('/api/Demo')
   }
 
+  handleChangeName (e,index){
+    let currentName = [...this.state.items]
+    let newName = e.target.value;
+    currentName[index].itemName = newName;
+    this.setState({
+      items:currentName
+    })
+    console.log(this.state.items[index])
+  }
   handleChangeQty(e,index){
     let currentQty = [...this.state.items]
     let newQty = Number(e.target.value);
@@ -79,7 +93,7 @@ export default class Home extends React.Component {
               <div className ="itemsRow" key = {items.itemId}>
                 {items.itemId}
               <div className = "itemName">
-                {items.itemName}
+                <input onChange = {e=>{this.handleChangeName(e,index)}} type ="string" defaultValue={items.itemName}/>
               </div>
                <div className = "itemPrice">
                   $
@@ -90,8 +104,8 @@ export default class Home extends React.Component {
                 <input onChange = {e => {this.handleChangeQty(e,index)}}type = "number" className = "qtyInput" defaultValue = {items.itemQty}/>
               </div>
               <div className ="buttons">
-                <button>Update</button>
-                <button>Remove</button>
+                <button onClick = {e=> {this.handleUpdate(e,index)}}>Update</button>
+                <button onClick = {e=> {this.handleRemove(e,index)}}>Remove</button>
               </div>
             </div>
             )

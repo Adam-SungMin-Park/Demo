@@ -46,6 +46,21 @@ app.post('/api/Demo',(req,res)=>{
 
 })
 
+app.put('/api/Demo/update', (req,res)=>{
+  const sql = `
+    update "items"
+    set "itemName" = $1,
+        "itemPrice" = $2,
+        "itemQty" = $3
+    where "itemId" = $4
+  `
+const params = [req.body.itemName , req.body.itemPrice , req.body.itemQty , req.body.itemId]
+
+  db.query(sql,params)
+  .then(result => res.status(203).json(result.rows))
+  .catch(err => console.log("UPDATE NOT WORKING :"))
+})
+
 
 
 

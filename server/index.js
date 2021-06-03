@@ -46,6 +46,19 @@ app.post('/api/Demo',(req,res)=>{
 
 })
 
+app.delete('/api/Demo/remove',(req,res)=>{
+  const sql =`
+    delete from "items"
+    where "itemId" = $1
+  `
+  const params = [req.body.itemId]
+
+  db.query(sql,params)
+  .then(result => res.status(207).json(result.rows))
+  .catch(err => console.log("DELETE NOT WORKING : "+ err))
+})
+
+
 app.put('/api/Demo/update', (req,res)=>{
   const sql = `
     update "items"

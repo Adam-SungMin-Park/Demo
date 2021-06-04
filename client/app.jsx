@@ -4,6 +4,7 @@ import parseRoute from './pages/parseroute';
 import AddItem from './pages/additem';
 import Update from './pages/update';
 import Home from './pages/home';
+import Cart from './pages/cart';
 
 
 
@@ -43,6 +44,9 @@ export default class App extends React.Component {
     }
     if(route.path === "update" ){
       return<Update/>
+    }
+    if(route.path === "cart"){
+      return <Cart/>
     }
   }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Cart from './cart'
 
 export default class Home extends React.Component{
   constructor(props){
@@ -9,8 +10,15 @@ export default class Home extends React.Component{
         itemName:"",
         itemPrice:"",
         itemQty:""
+      }],
+      cart: [{
+        itemId:"",
+        itemName:"",
+        itemPrice:"",
+        itemQty:""
       }]
   }
+  this.handleQtyChange = this.handleQtyChange.bind(this);
 }
   componentDidMount(){
      fetch('/api/Demo')
@@ -27,10 +35,18 @@ export default class Home extends React.Component{
     })
   }
 
+  handleQtyChange(e,index){
+    let cartItem = this.state.items[index]
+    cartItem.itemQty = e.target.value;
+    this.setState({
+      cart: cartItem
+    })
+  }
 
 
 render(){
   console.log(this.state.items)
+  console.log(this.state.cart)
 
    if(this.state.items.length !==0){
       return(
@@ -52,6 +68,7 @@ render(){
                  {items.itemQty}
               </div>
               <div className ="buttons">
+                <input type= "number" className = "qtyInput" min ="1" placeholder = "1" onChange = {e => this.handleQtyChange(e,index)} />
                 <button onClick = {e=> {this.handleUpdate(e,index)}}>Add to cart</button>
 
               </div>
@@ -59,6 +76,7 @@ render(){
             )
           })}
           </div>
+
         </div>
       )
     }

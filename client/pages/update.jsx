@@ -91,12 +91,11 @@ export default class Update extends React.Component {
     })
   }
   render(){
-    const {itemId , price, name , qty} = this.state.items
-    const {items} = this.state.items
+
 
     if(this.state.items.length !==0){
       return(
-        <div className = "container">
+        <div className = "container-lg">
           <div className = "row">
           {this.state.items.map((items, index )=>{
             return(

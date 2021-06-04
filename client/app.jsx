@@ -5,6 +5,7 @@ import AddItem from './pages/additem';
 import Update from './pages/update';
 import Home from './pages/home';
 import Cart from './pages/cart';
+import Orders from './pages/orders';
 
 
 
@@ -47,6 +48,9 @@ export default class App extends React.Component {
     }
     if(route.path === "cart"){
       return <Cart/>
+    }
+    if(route.path === "orders"){
+      return <Orders/>
     }
   }
 

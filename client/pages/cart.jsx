@@ -11,11 +11,12 @@ export default class Cart extends React.Component{
     console.log(this.props)
     return(
       <div className = "container-lg">
-        <div className = "row">
-          Billing Address
-        </div>
+
         <div className = "row">
           <div className = "col">
+            <h2>
+            Billing Address
+            </h2>
           <form class="row g-3">
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Email</label>
@@ -60,7 +61,10 @@ export default class Cart extends React.Component{
           </form>
           </div>
           <div className = "col-6">
-            <h1>Hello</h1>
+            <h2>Shopping Cart</h2>
+            <form>
+
+            </form>
           </div>
         </div>
       </div>

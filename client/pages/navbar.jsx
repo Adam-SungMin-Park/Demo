@@ -44,6 +44,9 @@ export default class NavBar extends React.Component{
               <li className="nav-item">
                 <a className="nav-link" href="#cart" onClick={this.handleClick}>Cart</a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#orders" onClick={this.handleClick}>Orders</a>
+              </li>
             </ul>
           </div>
         </div>

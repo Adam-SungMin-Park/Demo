@@ -16,10 +16,13 @@ export default class Home extends React.Component{
         itemName:"",
         itemPrice:"",
         itemQty:""
-      }]
+      },]
   }
   this.handleQtyChange = this.handleQtyChange.bind(this);
+  this.handleCart = this.handleCart.bind(this);
 }
+
+
   componentDidMount(){
      fetch('/api/Demo')
     .then(res => res.json())
@@ -34,19 +37,23 @@ export default class Home extends React.Component{
       })
     })
   }
+  handleCart(e,index){
+    console.log(index)
+  }
 
   handleQtyChange(e,index){
-    let cartItem = this.state.items[index]
+    let cartItem = Object(this.state.items[index])
     cartItem.itemQty = e.target.value;
+
     this.setState({
-      cart: cartItem
+      cart: this.state.cart.push(cartItem)
     })
   }
 
 
 render(){
   console.log(this.state.items)
-  console.log(this.state.cart)
+  console.log(typeof(this.state.items))
 
    if(this.state.items.length !==0){
       return(
@@ -69,7 +76,7 @@ render(){
               </div>
               <div className ="buttons">
                 <input type= "number" className = "qtyInput" min ="1" placeholder = "1" onChange = {e => this.handleQtyChange(e,index)} />
-                <button onClick = {e=> {this.handleUpdate(e,index)}}>Add to cart</button>
+                <button onClick = {e=> {this.handleCart(e,index)}}>Add to cart</button>
 
               </div>
             </div>

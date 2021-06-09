@@ -8,10 +8,13 @@
 .rowItemId {
   display: grid;
 }
+.entryRow {
+  margin-top: 1rem;
+}
 .itemsRow {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+
   margin-bottom: 1rem;
 }
 .itemQty {
@@ -28,4 +31,5 @@
 .qtyInput {
   margin-left: 1rem;
   width: 35%;
+  margin-right: 0.3rem;
 }
